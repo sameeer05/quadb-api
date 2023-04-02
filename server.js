@@ -8,6 +8,7 @@ const cors = require('cors')
 const app = express()
 const PORT = 3004
 app.use(cors())
+app.use(express.static(path.join(__dirname, 'static')))
 
 mongoose.connect('mongodb+srv://todo-list:FCdb1i40Zz0vdT5d@cluster0.txyxcdv.mongodb.net/tickerDb?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -45,7 +46,7 @@ mongoose.connect('mongodb+srv://todo-list:FCdb1i40Zz0vdT5d@cluster0.txyxcdv.mong
 
 
 // Define a route to get tickers data from the database
-app.get('/', async (req, res) => {
+app.get('/api', async (req, res) => {
   try {
     const tickers = await TickerModel.find().limit(10);
     res.json(tickers);
@@ -54,6 +55,11 @@ app.get('/', async (req, res) => {
     res.status(500).send('Internal server error');
   }
 });
+
+// route to serve index.html file
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+})
 
 // Start the server
 app.listen(PORT, () => {

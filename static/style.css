@@ -40,7 +40,51 @@ h4 {
 }
 
 .buttons {
+    display: flex;
     width: 33%;
+}
+
+.timer-img {
+    width: 40px;
+    padding-top: 10px;
+}
+
+.timer-img img {
+    width: 100%;
+}
+
+.connect-button {
+    display: flex;
+    background-color: #3dc6c1;
+    padding: 7px 15px;
+    margin: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.telegram-image {
+    width: 17px;
+    padding: 0 10px 0 0;
+    align-items: center;
+}
+
+.telegram-image img {
+    width: 100%;
+}
+
+.connect-text h4 {
+    padding: 0 10px;
+    margin: 0;
+}
+
+.toggle-img {
+    height: 50px;
+    padding-top: 7px;
+    cursor: pointer;
+}
+
+.toggle-img img {
+    height: 100%;
 }
 
 table {
