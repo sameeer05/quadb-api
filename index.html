@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>HodlInfo</title>
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="logo">
+        <img src="hodlinfo-logo.png">
+      </div>
+      <div class="dropdowns">
+        <select class="dropdown">
+          <option value="inr">INR</option>
+          <option value="usd">USD</option>
+        </select>
+        <select class="dropdown">
+          <option value="btc">BTC</option>
+          <option value="eth">ETH</option>
+          <option value="xrp">USDT</option>
+          <option value="xrp">XRP</option>
+          <option value="trx">TRX</option>
+        </select>
+      </div>
+      <div class="connect">
+        <img src="hodlinfo-buttons.png">
+      </div>
+    </div>
+    <div>
+      <table>
+        <thead>
+          <th><h4>#</h4></th>
+          <th><h4>name</h4></th>
+          <th><h4>Last</h4></th>
+          <th><h4>Buy/Sell Price</h4></th>
+          <th><h4>volume</h4></th>
+          <th><h4>base_unit</h4></th>
+        </thead>
+        <tbody id="data-output">
+
+        </tbody>
+      </table>
+      <script>
+        fetch("http://localhost:3004")
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (products) {
+            let placeholder = document.querySelector("#data-output");
+            let out = "";
+            for (let product of products) {
+              out += `
+         <tr class='table-elements'>
+            <td><h4> ${products.indexOf(product)+1} </h4></td>
+            <td><h4> ${product.name} </h4></td>
+            <td><h4> ₹${product.last} </h4></td>
+            <td><h4> ₹${product.buy}/₹${product.sell} </h4></td>
+            <td><h4> ${product.volume} </h4></td>
+            <td><h4> ${product.base_unit} </h4></td>
+         </tr>
+      `;
+            }
+            console.log(out)
+            placeholder.innerHTML = out;
+          });
+      </script>
+    </div>
+  </body>
+</html>
